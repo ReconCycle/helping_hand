@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>helping_hand_services</name>
+  <version>0.1.0</version>
+  <description>Helping Hand Services is a ROS package containing the core services for the Helping Hand kinesthetic teaching framework.</description>
+
+  <maintainer email="timotej.gaspar@ijs.si">Timotej Gaspar</maintainer>
+
+  <license>BSD</license>
+
+  <author email="timotej.gaspar@gmail.com">Timotej Gaspar</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>trajectory_msgs</depend>
+  
+  <!-- <test_depend>python-unittest2</test_depend> -->
+  <!-- <test_depend>rostest</test_depend> -->
+
+  <export>
+  </export>
+</package>
