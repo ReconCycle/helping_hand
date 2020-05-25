@@ -1,6 +1,6 @@
 <package>
-  <name>reconcell</name>
-  <version>0.0.1</version>
+  <name>helping_hand</name>
+  <version>0.1.0</version>
   <description>
     The Helping Hand package aims at facilitating kinesthetic teaching of robot trajectories, poses and actions by providing services and comperhensive GUIs.</description>
   <author email="timotej.gaspar@ijs.si">Timotej Gaspar</author>
