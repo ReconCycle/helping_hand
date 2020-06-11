@@ -57,7 +57,6 @@ class ConfigurationCapture(object):
 
             return 0
 
-
         # Define the service proxies
         try:
             save_tf_srvs = rospy.Service('tf_capture', CaptureTF, self._handle_tf_save)
@@ -68,23 +67,20 @@ class ConfigurationCapture(object):
 
             return 0
         
-        rospy.spin()
+        # Notify the user the node is running
+        rospy.loginfo("Hepling hand is running!")
 
+        rospy.spin()
 
     def _handle_joint_save(self, req):
         try:
             # Display what you are doing
-            rospy.loginfo("Storing the provided joint configuration as <{}> into the database".format(
-                req.joints
+            rospy.loginfo("Storing the provided joint configuration as <{}> into the database ...".format(
+                req.entry_name
             ))
 
-
-            # If you cannot update an existing entry, make a new one
-            if not(self._msg_store.update_named(req.joints, req.entry_name).success):
-                self._msg_store.insert_named(req.joints, req.entry_name)
-
-            # Tell the service to reload all the TFs
-            self._database_service()
+            # Save to DB
+            self._save_to_db(req.joints, req.entry_name)
             
             # Return the success
             return CaptureJointResponse(message='Frame saved', success=True)
@@ -93,23 +89,13 @@ class ConfigurationCapture(object):
             rospy.logerr("Failed to handle request with exception:\n{}".format(e))
             return CaptureJointResponse(message='Failed with exception:\n{}'.format(e), success=False)
 
-
-
-
-
-
     def _handle_pose_save(self, req):
+        # Work in progress, not implemented yet
         pass
 
     def _handle_topic_save(self, req):
-        try:
-            # topic_name = req.topic_name
-            # rospy.wait_for_service(topic_name, rospy.Duration(1))
-            return CaptureTopicResponse(message='Message saved', success=True)
-        except Exception as e:
-            # Handle exceptions
-            rospy.logerr("Failed to handle request with exception:\n{}".format(e))
-            return CaptureTopicResponse(message='Failed with exception:\n{}'.format(e), success=False)
+        # Work in progress, not implemented yet
+        pass
 
     def _handle_tf_save(self, req):
         try:
@@ -120,18 +106,13 @@ class ConfigurationCapture(object):
             resulting_frame.child_frame_id = req.new_frame_name
 
             # Display what you are doing
-            rospy.loginfo("Storing transformation from <{0}> to <{1}> with the new name <{2}> into the database".format(
+            rospy.loginfo("Storing transformation from <{0}> to <{1}> with the new name <{2}> into the database ...".format(
                 req.from_frame, req.to_frame, req.new_frame_name
             ))
 
+            # Save to DB
+            self._save_to_db(resulting_frame, req.new_frame_name)
 
-            # If you cannot update an existing entry, make a new one
-            if not(self._msg_store.update_named(req.new_frame_name, resulting_frame).success):
-                self._msg_store.insert_named(req.new_frame_name, resulting_frame)
-
-            # Tell the service to reload all the TFs
-            self._database_service()
-            
             # Return the success
             return CaptureTFResponse(message='Frame saved', success=True)
         except Exception as e:
@@ -139,6 +120,16 @@ class ConfigurationCapture(object):
             rospy.logerr("Failed to handle request with exception:\n{}".format(e))
             return CaptureTFResponse(message='Failed with exception:\n{}'.format(e), success=False)
 
+    def _save_to_db(self, entry, name):
+        # If you cannot update an existing entry, make a new one
+        if not(self._msg_store.update_named(name, entry).success):
+            self._msg_store.insert_named(name, entry)
+            rospy.loginfo('Entry <{}> inserted !!'.format(name))
+        else:
+            rospy.loginfo('Entry <{}> updated !!'.format(name))
 
+
+        # Tell the service to reload all the TFs
+        self._database_service()
 
 
