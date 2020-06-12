@@ -1,0 +1,16 @@
+# This is an example configuration
+conf_1:
+    trig_name: "UR10 2 Digital Output"
+    trig_topic: "/ur10_2/digital_outputs_array"
+    trig_value: [4, true]
+    trig_callback: "joint_save"
+conf_2:
+    trig_name: "UR10 1 Digital Output"
+    trig_topic: "/ur10_2/button_a"
+    trig_value: [0, true]
+    trig_callback: "joint_pose_save"
+conf_3:
+    trig_name: "UR10 1 Digital Output"
+    trig_topic: "/ur10_2/button_a"
+    trig_value: [0, true]
+    trig_callback: "joint_dmp_save"

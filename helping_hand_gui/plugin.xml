@@ -1,0 +1,35 @@
+<!-- library@path: The package-relative path which gets added to sys.path. -->
+<library path="src">
+  <!-- /library/class@name: The name of the plugin, which must be unique within a package. -->
+  <!-- /library/class@type: The concatenated name of the package, module and class, which is used for the import statement. (Form: package.module.class) -->
+  <!-- /library/class@base_class_type: For Python plugins which use the rospy client library the value is rqt_gui_py::Plugin.-->
+  <class name="Helping hand GUI" type="gui_code.DMPRecordToolGUI" base_class_type="rqt_gui_py::Plugin">
+    <!-- /library/description: The description of the plugin. -->
+    <description>
+      A GUI to for the helping hand tool
+    </description>
+    <!-- /library/qtgui: This tag contains additional optional information about the package. If none are provided, the name of the plugin is used as the label for the plugin in the menu and the description is displayed as a status tip. -->
+    <qtgui>
+      <!-- /library/qtgui/group (optional, multiple): Enables grouping of plugins. Group tags can contain a label, icon and statustip tag. The groups form a hierarchy of menus where the plugin is added as the leaf. The groups of different plugins are merged based on their label (icons and statustip may be overridden by other plugins when they are defined differently). -->
+      <!-- /library/qtgui/label: Overrides the label with which the plugin appears in the menu.
+           /library/qtgui/icon: Defines the icon that should be shown beside the label (depending on the type of attribute).
+           /library/qtgui/icon@type:
+              * file (default): the icon value is a package-relative path to an image.
+              * theme: the icon value names an icon defined by the Icon Naming Specification.
+              * resource: the icon value names a Qt resource.
+           /library/qtgui/statustip: Overrides the status tip that is shown when hovering over the plugin label.
+      -->
+      <!-- optional grouping...
+      <group>
+        <label>Group</label>
+      </group>
+      <group>
+        <label>Subgroup</label>
+      </group>
+      -->
+      <label>Helping hand GUI</label>
+      <icon type="theme">system-help</icon>
+      <statustip>Working normaly.</statustip>
+    </qtgui>
+  </class>
+</library>

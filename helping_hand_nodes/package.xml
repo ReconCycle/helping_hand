@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>helping_hand_database</name>
+  <name>helping_hand_nodes</name>
   <version>0.1.0</version>
-  <description>Helping Hand Database is a ROS package containing the service interfacing with the database.</description>
+  <description>Helping Hand Nodes provide various usefull tools.</description>
 
   <maintainer email="timotej.gaspar@ijs.si">Timotej Gaspar</maintainer>
 

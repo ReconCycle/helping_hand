@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>helping_hand_services</name>
+  <name>helping_hand_gui</name>
   <version>0.1.0</version>
   <description>Helping Hand Services is a ROS package containing the core services for the Helping Hand kinesthetic teaching framework.</description>
 
@@ -20,10 +20,14 @@
   <depend>sensor_msgs</depend>
   <depend>trajectory_msgs</depend>
   <depend>dmp_msgs</depend>
+  <depend>dmp_record_tool</depend>
+  <depend>rqt_gui</depend>
+  <depend>rqt_gui_py</depend>
   
   <!-- <test_depend>python-unittest2</test_depend> -->
   <!-- <test_depend>rostest</test_depend> -->
 
   <export>
+  	  <rqt_gui plugin="${prefix}/plugin.xml"/>
   </export>
 </package>

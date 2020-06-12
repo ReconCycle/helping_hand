@@ -1,0 +1,39 @@
+#! /usr/bin/env python
+from helping_hand_nodes.num_to_bool_republisher import NumberToBooleanRepublisher
+from optparse import OptionParser
+
+if __name__ == "__main__":
+    parser = OptionParser()
+    service_name = 'gpio_control'
+    parser.add_option("-i", "--input_topic", dest="topic_from",
+                      help="Topic to republish data from.", metavar="INPUT")
+    parser.add_option("-o", "--output_topic", dest="topic_to",
+                      help="Topic to republish data to.", metavar="OUTPUT")
+    parser.add_option("-p", "--bit_position", dest="bit_loc",
+                      help="Location of bit to monitor. Set to 0 if not provided.", metavar="BITLOC")
+    (options, args) = parser.parse_args()
+
+    try:
+        if options.topic_from is not None:
+            topic_from = options.topic_from
+        else:
+            raise Exception('Source topic not provided !!')
+        if options.topic_to is not None:
+            topic_to = options.topic_to
+        else:
+            raise Exception('Target topic not provided !!')
+        if options.bit_loc is not None:
+            bit_loc = int(options.bit_loc)
+        else:
+            bit_loc = 0
+    except Exception as e:
+        print('Could not parse arguments, reason:\n{}'.format(e))
+
+    # print("args: {0}".format(args))
+    # print("options: {0}".format(options))
+
+    try:
+        NumberToBooleanRepublisher(bit_loc=bit_loc, topic_from=topic_from, topic_to=topic_to)
+    except Exception as e:
+        print('Aborting launching of parser, reason:\n{}'.format(e))
+

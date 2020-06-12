@@ -19,15 +19,16 @@ from geometry_msgs.msg import Transform, TransformStamped, Point, Quaternion, Po
 # Service messages
 from helping_hand_msgs.srv import CaptureTF, CaptureTFRequest, CaptureTFResponse
 from helping_hand_msgs.srv import CaptureJoint, CaptureJointRequest, CaptureJointResponse
-from helping_hand_msgs.srv import CaptureTopic, CaptureTopicRequest, CaptureTopicResponse
-from helping_hand_msgs.srv import CapturePose, CapturePoseRequest, CapturePoseResponse
+from helping_hand_msgs.srv import CaptureDMP, CaptureDMPRequest, CaptureDMPResponse
+# from helping_hand_msgs.srv import CaptureTopic, CaptureTopicRequest, CaptureTopicResponse
+# from helping_hand_msgs.srv import CapturePose, CapturePoseRequest, CapturePoseResponse
 
 
 # Mongo DB
 from mongodb_store.message_store import MessageStoreProxy
 
 
-class ConfigurationCapture(object):
+class DatabasePusher(object):
     
     # TF buffer
     tf2_buffer = None
@@ -61,6 +62,7 @@ class ConfigurationCapture(object):
         try:
             save_tf_srvs = rospy.Service('tf_capture', CaptureTF, self._handle_tf_save)
             save_joint_srvs = rospy.Service('joint_capture', CaptureJoint, self._handle_joint_save)
+            save_dmp_srvs = rospy.Service('dmp_capture', CaptureDMP, self._handle_dmp_save)
         except Exception as e:
             rospy.logerr('Could not initialize {}'.format(rospy.get_name()))
             rospy.loginfo('Exceptions: {}'.format(e))
@@ -119,6 +121,30 @@ class ConfigurationCapture(object):
             # Handle exceptions
             rospy.logerr("Failed to handle request with exception:\n{}".format(e))
             return CaptureTFResponse(message='Failed with exception:\n{}'.format(e), success=False)
+
+    def _handle_dmp_save(self, req):
+        try:
+            # Display what you are doing
+            rospy.loginfo("Storing the provided DMP as <{}> into the database ...".format(
+                req.entry_name
+            ))
+
+            if len(req.cartesian_dmp.w) == len(req.joint_dmp.w):
+                raise Exception("Either both DMP are provided or none. Not saving.")
+            
+            if len(req.joint_dmp.w) != 1:
+                self._save_to_db(req.joint_dmp, req.entry_name)
+                
+            if len(req.cartesian_dmp.w) != 1:
+                self._save_to_db(req.cartesian_dmp, req.entry_name)
+
+            # Return the success
+            return CaptureDMPResponse(message='Frame saved', success=True)
+        except Exception as e:
+            # Handle exceptions
+            rospy.logerr("Failed to handle request with exception:\n{}".format(e))
+            return CaptureDMPResponse(message='Failed with exception:\n{}'.format(e), success=False)
+
 
     def _save_to_db(self, entry, name):
         # If you cannot update an existing entry, make a new one
