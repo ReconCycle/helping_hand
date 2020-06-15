@@ -3,7 +3,7 @@
   <!-- /library/class@name: The name of the plugin, which must be unique within a package. -->
   <!-- /library/class@type: The concatenated name of the package, module and class, which is used for the import statement. (Form: package.module.class) -->
   <!-- /library/class@base_class_type: For Python plugins which use the rospy client library the value is rqt_gui_py::Plugin.-->
-  <class name="Helping hand GUI" type="gui_code.DMPRecordToolGUI" base_class_type="rqt_gui_py::Plugin">
+  <class name="Helping hand GUI" type="gui_code.HelpingHandGUI" base_class_type="rqt_gui_py::Plugin">
     <!-- /library/description: The description of the plugin. -->
     <description>
       A GUI to for the helping hand tool

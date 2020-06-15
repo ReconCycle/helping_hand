@@ -21,9 +21,10 @@
   <depend>trajectory_msgs</depend>
   <depend>dmp_msgs</depend>
   <depend>dmp_record_tool</depend>
+  <depend>helping_hand_msgs</depend>
   <depend>rqt_gui</depend>
   <depend>rqt_gui_py</depend>
-  
+
   <!-- <test_depend>python-unittest2</test_depend> -->
   <!-- <test_depend>rostest</test_depend> -->
 

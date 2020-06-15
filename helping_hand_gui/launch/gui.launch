@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node name="heling_hand_gui" pkg="rqt_gui" type="rqt_gui" required="true" output="screen" args="--standalone helping_hand_gui" />
+  <node name="helping_hand_services" pkg="helping_hand_services" type="helping_hand_services" required="true" output="screen"/>
+</launch>

@@ -122,7 +122,7 @@ class StatusReport(dict):
         self.gui._print_status()
 
 
-class DMPRecordToolGUI(Plugin):
+class HelpingHandGUI(Plugin):
 
     # Various member variables
     # _topic_subscriber = None
@@ -185,9 +185,9 @@ class DMPRecordToolGUI(Plugin):
     _old_index = 0
 
     def __init__(self, context):
-        super(DMPRecordToolGUI, self).__init__(context)
+        super(HelpingHandGUI, self).__init__(context)
         # Give QObjects reasonable names
-        self.setObjectName('DMPRecordToolGUI')
+        self.setObjectName('HelpingHandGUI')
 
         # Process standalone plugin command-line arguments
         from argparse import ArgumentParser

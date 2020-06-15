@@ -20,6 +20,7 @@
   <depend>sensor_msgs</depend>
   <depend>trajectory_msgs</depend>
   <depend>mongodb_store</depend>
+  <depend>helping_hand_msgs</depend>
   <!-- <test_depend>python-unittest2</test_depend> -->
   <!-- <test_depend>rostest</test_depend> -->
 
