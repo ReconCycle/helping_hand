@@ -36,4 +36,3 @@ if __name__ == "__main__":
         NumberToBooleanRepublisher(bit_loc=bit_loc, topic_from=topic_from, topic_to=topic_to)
     except Exception as e:
         print('Aborting launching of parser, reason:\n{}'.format(e))
-

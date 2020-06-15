@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+
+<arg name="button_a_loc" default="2"/>
+<arg name="button_b_loc" default="3"/>
+
+<node name="button_a_republisher" pkg="helping_hand_nodes" type="num2bool_republisher"
+  args="-i /ur10_2/digital_inputs -o /ur10_2/button_a -p $(arg button_a_loc)" required="true" output="screen"/>
+<node name="button_b_republisher" pkg="helping_hand_nodes" type="num2bool_republisher"
+  args="-i /ur10_2/digital_inputs -o /ur10_2/button_b -p $(arg button_b_loc)" required="true" output="screen"/>
+</launch>

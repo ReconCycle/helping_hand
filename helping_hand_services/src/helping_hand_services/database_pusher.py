@@ -29,7 +29,7 @@ from mongodb_store.message_store import MessageStoreProxy
 
 
 class DatabasePusher(object):
-    
+
     # TF buffer
     tf2_buffer = None
 
@@ -38,7 +38,7 @@ class DatabasePusher(object):
 
 
     def __init__(self):
-        
+
         rospy.init_node('configuration_services')
 
         # TF
@@ -68,7 +68,7 @@ class DatabasePusher(object):
             rospy.loginfo('Exceptions: {}'.format(e))
 
             return 0
-        
+
         # Notify the user the node is running
         rospy.loginfo("Hepling hand is running!")
 
@@ -83,7 +83,7 @@ class DatabasePusher(object):
 
             # Save to DB
             self._save_to_db(req.joints, req.entry_name)
-            
+
             # Return the success
             return CaptureJointResponse(message='Frame saved', success=True)
         except Exception as e:
@@ -131,10 +131,10 @@ class DatabasePusher(object):
 
             if len(req.cartesian_dmp.w) == len(req.joint_dmp.w):
                 raise Exception("Either both DMP are provided or none. Not saving.")
-            
+
             if len(req.joint_dmp.w) != 1:
                 self._save_to_db(req.joint_dmp, req.entry_name)
-                
+
             if len(req.cartesian_dmp.w) != 1:
                 self._save_to_db(req.cartesian_dmp, req.entry_name)
 

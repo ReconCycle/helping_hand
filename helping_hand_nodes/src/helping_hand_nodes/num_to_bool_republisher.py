@@ -31,4 +31,3 @@ class NumberToBooleanRepublisher(object):
         bin_array[0:len(tmp_array)] = tmp_array
 
         self.publisher.publish(Bool(bin_array[self.bit_loc]))
-
