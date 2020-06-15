@@ -24,7 +24,6 @@ The cloned dependencies should show up in your src directory. You can now procee
 
 Finally, build the packages:
 
-`$ cd ..`
 `$ catkin build`
 
 
