@@ -665,3 +665,4 @@ class HelpingHandGUI(Plugin):
     #     # Save the current values to use them in the next cycle
     #     self._old_gravbutton = int(self._digitalinput) >> BUTTON_1_PIN
     #     self._old_rec_button = int(self._digitalinput) >> BUTTON_2_PIN
+

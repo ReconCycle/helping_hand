@@ -1,4 +1,4 @@
-# helping_hand
+# Helping Hand
 A framework to facilitate kinesthetic teaching of robot motions.
 
 # Installation instructions
@@ -13,7 +13,9 @@ Navigate to the `src/` directory of your catkin workspace and clone this repo:
 Merge all the dependencies
 
 `$ wstool init`
+
 `$ wstool merge helping_hand/dependencies.rosinstall`
+
 `$ wstool up`
 
 ## Get the dependencies
