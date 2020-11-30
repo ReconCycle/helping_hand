@@ -20,6 +20,7 @@
   <depend>sensor_msgs</depend>
   <depend>trajectory_msgs</depend>
   <depend>dmp_msgs</depend>
+  <depend>tf2_ros</depend>
   
   <!-- <test_depend>python-unittest2</test_depend> -->
   <!-- <test_depend>rostest</test_depend> -->
