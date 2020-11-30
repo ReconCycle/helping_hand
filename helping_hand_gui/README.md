@@ -19,7 +19,7 @@ See images bellow
 
 ![alt text](img/hh_capt.png "Capture controls tab")
 
-![alt text](img/hh_capt.png "Settings/Configuration tab")
+![alt text](img/hh_conf.png "Settings/Configuration tab")
 
 
 ## Configuration
