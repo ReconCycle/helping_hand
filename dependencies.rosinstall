@@ -11,6 +11,6 @@
    uri: https://repo.ijs.si/tgaspar/dmp_library.git 
    version: code_refactor    
 - git:
-   local-name: dmp_library_msgs
-   uri: https://repo.ijs.si/reconcell/dmp_record_tool
+   local-name: dmp_record_tool_msgs
+   uri: https://repo.ijs.si/reconcell/dmp_record_tool_msgs
    version: new_dmp_lib
