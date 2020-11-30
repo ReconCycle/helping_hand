@@ -1,13 +1,14 @@
 - git:
     local-name: helping_hand_msgs 
-    uri: git@github.com:tgaspar/helping_hand_msgs.git 
+    uri: https://github.com/tgaspar/helping_hand_msgs.git
     version: main
 - git:
    local-name: dmp_record_tool
-   uri: git@repo.ijs.si:reconcell/dmp_record_tool.git
+   uri: https://repo.ijs.si/reconcell/dmp_record_tool.git
    version: new_dmp_lib
 - git: 
    local-name: dmp_library
-   uri: git@repo.ijs.si:tgaspar/dmp_library.git
+   uri: https://repo.ijs.si/tgaspar/dmp_library.git 
    version: code_refactor    
+
 
