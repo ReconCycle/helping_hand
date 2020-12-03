@@ -22,6 +22,9 @@ class TfDatabasePublisher(object):
     world = None
 
     def __init__(self, world_frame='world'):
+
+	rospy.init_node("db_republisher")
+		
         self.msg_store = MessageStoreProxy()
         service = rospy.Service('apps/database/reload', Empty, self._cb_db_reload)
 
@@ -30,9 +33,11 @@ class TfDatabasePublisher(object):
         self.world.header.frame_id = 'world'
         self.world.child_frame_id = world_frame
         self.world.transform.rotation.w = 1.0
-
+	
+	rospy.loginfo("Started helping hand ...")
         # Publish the database at start
-        self.reload_db()
+        if not self.reload_db():
+	    raise Exception('Failed to reload the database')
 
         # Make the program stay awake
         rospy.spin()
@@ -46,7 +51,8 @@ class TfDatabasePublisher(object):
             self.read_database()
             self.broadcast_transforms()
             return True
-        except Exception:
+        except Exception as e:
+	    print("Reload failed with exception:\n{}".format(e))
             return False
 
     def broadcast_transforms(self):
