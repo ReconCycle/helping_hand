@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="db_path" default="/var/local/mongodb_store"/>
+    <include file="$(find helping_hand_nodes)/launch/db_republisher.launch">
+        <arg name="db_path" value="$(arg db_path)"/>
+    </include>
+
+    <node name="helping_hand_services" pkg="helping_hand_services" type="helping_hand_services" required="true" output="screen"/>
+</launch>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="db_path" default="/var/local/mongodb_store"/>
+    <include file="$(find mongodb_store)/launch/mongodb_store.launch">
+        <arg name="db_path" value="$(arg db_path)"/>
+    </include>
+
+    <node name="db_republisher" pkg="helping_hand_nodes" type="mongo_tf_republisher" required="true" output="screen"/>
+</launch>
