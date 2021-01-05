@@ -287,6 +287,8 @@ class HelpingHandGUI(Plugin):
             rospy.logerr("Could not establish a connection to services. See exception:\n{}".format(e))
             exit()
 
+        #Gravity compansation control init
+        self.grav_comp=True
 
     def _print_status(self):
         status_text_widget = self._widget.findChild(QTextEdit, 'statusWindow')
@@ -613,6 +615,18 @@ class HelpingHandGUI(Plugin):
                 save_data = [result_dmp]
                 self._joint_traj = []
 
+        elif trig_type == "grav_comp":
+            
+            if self.grav_comp==True :
+                self.grav_comp=False
+                print('turn off')
+                rospy.logdebug('grav_comp_off')
+            else :
+                self.grav_comp=True
+                print('turn on')
+                rospy.logdebug('grav_comp_on')
+   
+
         else:
             rospy.logerr("Unknown saving type !!")
             rospy.logerr("trig_type = {}".format(trig_type))
@@ -629,6 +643,8 @@ class HelpingHandGUI(Plugin):
                 'trig_type': trigg_conf['trig_type']
             }
             self._refresh_data_table_contents_sig.emit()
+
+
 
 
     # def digitalinput_cb(self, digitalinput):

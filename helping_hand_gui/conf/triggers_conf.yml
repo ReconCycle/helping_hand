@@ -9,7 +9,7 @@ conf_1:
     joint_topic: "test"
     last_frame_topic: "tool_name"
 conf_2:
-    trig_name: "Recor joint trajectory"
+    trig_name: "Record joint trajectory"
     robot_ns: "/"
     trig_topic: "/keypress/next"
     trig_type: "hold"
@@ -18,3 +18,10 @@ conf_2:
     joint_dmp_N: 50
     joint_topic: "test"
     last_frame_topic: "tool_name"
+conf_3:
+    trig_name: "Gravity commpensation on/off"
+    robot_ns: "/"
+    trig_topic: "/keypress/play_pause"
+    trig_type: "rising_edge"
+    trig_value: true
+    trig_callback: "grav_comp"
