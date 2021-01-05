@@ -273,7 +273,7 @@ class HelpingHandGUI(Plugin):
         # Create database proxy
         self._msg_store = MessageStoreProxy()
 
-        # Create the service proxies for into saving databse
+        # Create the service proxies for into saving database
         self._tf_capture_srv = rospy.ServiceProxy('tf_capture', CaptureTF)
         self._joint_capture_srv = rospy.ServiceProxy('joint_capture', CaptureJoint)
         self._dmp_capture_srv = rospy.ServiceProxy('dmp_capture', CaptureDMP)
@@ -564,7 +564,9 @@ class HelpingHandGUI(Plugin):
         new_val = data.data
         if falling_edge(old_val, new_val):
             rospy.logdebug("[_hold_cb] Falling edge")
+      
             if len(self._joint_traj):
+               
                 self._handle_trigger(self._conf_yaml[conf_name])
 
         if rising_edge(old_val, new_val):
@@ -602,6 +604,7 @@ class HelpingHandGUI(Plugin):
             traj_dur = traj_duration_sec(self._joint_traj)
             if traj_dur < 1:
                 rospy.logwarn("Trajectory too short to store")
+                self._joint_traj = []
             else:
                 dmp_request = EncodeTrajectoryToDMPRequest()
                 dmp_request.demonstratedTrajectory = self._joint_traj
