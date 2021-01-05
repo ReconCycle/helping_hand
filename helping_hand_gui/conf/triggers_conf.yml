@@ -25,3 +25,12 @@ conf_3:
     trig_callback: "joint_dmp_save"
     joint_dmp_N: 50
     joint_topic: "joint_states"
+conf_4:
+    trig_name: "UR10 Button A DMP"
+    robot_ns: ""
+    trig_topic: "/ur10_2/button_a"
+    trig_type: "rising_edge"
+    trig_value: true
+    trig_callback: "joint_dmp_save"
+    joint_dmp_N: 50
+    joint_topic: "joint_states"
