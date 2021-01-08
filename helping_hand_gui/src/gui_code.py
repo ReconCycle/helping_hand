@@ -288,7 +288,12 @@ class HelpingHandGUI(Plugin):
             exit()
 
         #Gravity compansation control init
-        self.grav_comp=True
+        self.grav_comp=False
+        robot_name='//impendance_server//'
+
+
+        self.srv_stiff=rospy.ServiceProxy(robot_name+'make_robot_stiff',Trigger)
+        self.srv_soft=rospy.ServiceProxy(robot_name+'make_robot_soft',Trigger)
 
     def _print_status(self):
         status_text_widget = self._widget.findChild(QTextEdit, 'statusWindow')
@@ -619,11 +624,16 @@ class HelpingHandGUI(Plugin):
             
             if self.grav_comp==True :
                 self.grav_comp=False
+
+
+                
+                self.srv_stiff.call(Trigger())
                 print('turn off')
                 rospy.logdebug('grav_comp_off')
             else :
                 self.grav_comp=True
                 print('turn on')
+                self.srv_soft.call(Trigger())
                 rospy.logdebug('grav_comp_on')
    
 
