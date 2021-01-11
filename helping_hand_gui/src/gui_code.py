@@ -628,13 +628,13 @@ class HelpingHandGUI(Plugin):
 
 
                 
-                self.srv_stiff.call(Trigger())
+                self.srv_stiff.call()
                 print('turn off')
                 rospy.logdebug('grav_comp_off')
             else :
                 self.grav_comp=True
                 print('turn on')
-                self.srv_soft.call(Trigger())
+                self.srv_soft.call()
                 rospy.logdebug('grav_comp_on')
    
 
