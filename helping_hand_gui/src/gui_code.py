@@ -41,6 +41,7 @@ from sensor_msgs.msg import JointState
 from std_msgs.msg import Bool
 from std_srvs.srv import SetBool
 from std_srvs.srv import Empty
+from std_srvs.srv import Trigger
 from robot_module_msgs.msg import JointSpaceDMP
 from robot_module_msgs.msg import CartesianSpaceDMP
 
