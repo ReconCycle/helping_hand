@@ -2,5 +2,5 @@
 <launch>
 
   <node name="helping_hand_gui" pkg="rqt_gui" type="rqt_gui" required="true" output="screen" args="--standalone helping_hand_gui" />
-
+  <node name="dmp_service" pkg="dmp_record_tool" type="dmp_service.py" required="true"/>
 </launch>
