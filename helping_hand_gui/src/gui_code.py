@@ -618,8 +618,7 @@ class HelpingHandGUI(Plugin):
                 dmp_request.demonstratedTrajectory = self._joint_traj
                 dmp_request.dmpParameters.N = trigg_conf['joint_dmp_N']
                 result_dmp = self._dmp_ecoder.call(dmp_request).encodedDMP
-                save_dmp = JointSpaceDMP()
-                save_data = [save_dmp]
+                save_data = [result_dmp]
                 self._joint_traj = []
 
         elif trig_type == "grav_comp":

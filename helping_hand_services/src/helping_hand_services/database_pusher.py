@@ -27,6 +27,9 @@ from helping_hand_msgs.srv import CaptureDMP, CaptureDMPRequest, CaptureDMPRespo
 # Mongo DB
 from mongodb_store.message_store import MessageStoreProxy
 
+# HACK  WE need to get write msgs
+from robot_module_msgs.msg import JointSpaceDMP
+
 
 class DatabasePusher(object):
 
@@ -133,12 +136,18 @@ class DatabasePusher(object):
                 #raise Exception("Either both DMP are provided or none. Not saving.")
 
             if len(req.joint_dmp.w) != 1:
-                self._save_to_db(req.joint_dmp, req.entry_name)
+
+                # HACK change msgs type to robot module msgs
+
+                test=req.joint_dmp
+                save_DMP=JointSpaceDMP()
+
+                self._save_to_db(save_DMP, req.entry_name)
 
             if len(req.cartesian_dmp.w) != 1:
                 self._save_to_db(req.cartesian_dmp, req.entry_name)
 
-            # Return the success
+            # Return the successs
             return CaptureDMPResponse(message='Frame saved', success=True)
         except Exception as e:
             # Handle exceptions
@@ -148,6 +157,8 @@ class DatabasePusher(object):
 
     def _save_to_db(self, entry, name):
         # If you cannot update an existing entry, make a new one
+        print(entry)
+        print(entry)
         if not(self._msg_store.update_named(name, entry).success):
             self._msg_store.insert_named(name, entry)
             rospy.loginfo('Entry <{}> inserted !!'.format(name))
