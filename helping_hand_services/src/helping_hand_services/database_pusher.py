@@ -131,7 +131,7 @@ class DatabasePusher(object):
             rospy.loginfo("Storing the provided DMP as <{}> into the database ...".format(
                 req.entry_name
             ))
-
+            # HACK
             #if len(req.cartesian_dmp.w) == len(req.joint_dmp.w):
                 #raise Exception("Either both DMP are provided or none. Not saving.")
 
@@ -139,13 +139,30 @@ class DatabasePusher(object):
 
                 # HACK change msgs type to robot module msgs
 
-                test=req.joint_dmp
+                record_DMP=req.joint_dmp
                 save_DMP=JointSpaceDMP()
 
-                self._save_to_db(save_DMP, req.entry_name)
 
-            if len(req.cartesian_dmp.w) != 1:
-                self._save_to_db(req.cartesian_dmp, req.entry_name)
+
+                save_DMP.header=record_DMP.header
+                save_DMP.N=record_DMP.N
+                save_DMP.y0=record_DMP.y0
+                save_DMP.goal=record_DMP.goal
+                save_DMP.a_z=record_DMP.a_z
+                save_DMP.b_z=record_DMP.b_z
+                save_DMP.a_x=record_DMP.a_x
+                save_DMP.d_t=record_DMP.d_t
+                save_DMP.id=record_DMP.id
+                save_DMP.tau=record_DMP.tau
+                save_DMP.c=record_DMP.c
+                save_DMP.sigma=record_DMP.sigma
+                save_DMP.w=record_DMP.w
+
+
+                self._save_to_db(save_DMP, req.entry_name)
+            # HACK
+            #if len(req.cartesian_dmp.w) != 1:
+                #self._save_to_db(req.cartesian_dmp, req.entry_name)
 
             # Return the successs
             return CaptureDMPResponse(message='Frame saved', success=True)
@@ -158,7 +175,7 @@ class DatabasePusher(object):
     def _save_to_db(self, entry, name):
         # If you cannot update an existing entry, make a new one
         print(entry)
-        print(entry)
+        
         if not(self._msg_store.update_named(name, entry).success):
             self._msg_store.insert_named(name, entry)
             rospy.loginfo('Entry <{}> inserted !!'.format(name))
