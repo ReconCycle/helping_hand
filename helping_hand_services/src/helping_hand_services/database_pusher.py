@@ -129,8 +129,8 @@ class DatabasePusher(object):
                 req.entry_name
             ))
 
-            if len(req.cartesian_dmp.w) == len(req.joint_dmp.w):
-                raise Exception("Either both DMP are provided or none. Not saving.")
+            #if len(req.cartesian_dmp.w) == len(req.joint_dmp.w):
+                #raise Exception("Either both DMP are provided or none. Not saving.")
 
             if len(req.joint_dmp.w) != 1:
                 self._save_to_db(req.joint_dmp, req.entry_name)
