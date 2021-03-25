@@ -174,8 +174,7 @@ class DatabasePusher(object):
 
     def _save_to_db(self, entry, name):
         # If you cannot update an existing entry, make a new one
-        print(entry)
-        
+  
         if not(self._msg_store.update_named(name, entry).success):
             self._msg_store.insert_named(name, entry)
             rospy.loginfo('Entry <{}> inserted !!'.format(name))
