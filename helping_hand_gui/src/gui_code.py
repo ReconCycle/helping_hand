@@ -609,6 +609,7 @@ class HelpingHandGUI(Plugin):
         elif trig_type == "joint_dmp_save":
             rospy.logdebug('joint_dmp_save')
 
+            print(self._joint_traj)
             traj_dur = traj_duration_sec(self._joint_traj)
             if traj_dur < 1:
                 rospy.logwarn("Trajectory too short to store")
