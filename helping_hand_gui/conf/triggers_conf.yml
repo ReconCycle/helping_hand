@@ -1,13 +1,13 @@
 # This is an example configuration
-conf_1:
-    trig_name: "Record joint state"
-    robot_ns: "/panda_1/"
-    trig_topic: "/keypress/previous"
-    trig_type: "rising_edge"
-    trig_value: true
-    trig_callback: "joint_save"
-    joint_topic: "joint_states"
-    last_frame_topic: "tool_name"
+# conf_1:
+#     trig_name: "Record joint state"
+#     robot_ns: "/panda_1/"
+#     trig_topic: "/keypress/previous"
+#     trig_type: "rising_edge"
+#     trig_value: true
+#     trig_callback: "joint_save"
+#     joint_topic: "joint_states"
+#     last_frame_topic: "tool_name"
 conf_2:
     trig_name: "Record joint trajectory"
     robot_ns: "/panda_1/"
@@ -19,7 +19,7 @@ conf_2:
     joint_topic: "joint_states"
     last_frame_topic: "tool_name"
 conf_3:
-    trig_name: "Gravity commpensation on/off"
+    trig_name: "Gravity compensation on/off"
     robot_ns: "/"
     trig_topic: "/keypress/play_pause"
     trig_type: "rising_edge"
@@ -44,4 +44,13 @@ conf_5:
     joint_dmp_N: 50
     joint_topic: "joint_states"
     last_frame_topic: "tool_name"
-
+conf_6:
+    trig_name: "Record TF for Panda 2"
+    robot_ns: "/panda_2/"
+    trig_topic: "/keypress/previous"
+    trig_type: "rising_edge"
+    trig_value: true
+    trig_callback: "tf_save"
+    source_frame: "panda_link0"
+    target_frame: "panda_EE"
+    last_frame_topic: "tool_name"

@@ -336,7 +336,11 @@ class HelpingHandGUI(Plugin):
             if conf_val['trig_callback'] == 'joint_dmp_save':
                 joint_topic_addr = conf_val['robot_ns'] + conf_val['joint_topic']
                 conf_val['subscriber'] = rospy.Subscriber(joint_topic_addr, JointState, callback=self._joint_state_cb, callback_args=(conf_key))
-            # Add TF
+            if conf_val['trig_callback'] == 'tf_save':
+                tf_frames_msg = CaptureTF()
+                tf_frames_msg.from_frame = conf_val['source_frame']
+                tf_frames_msg.to_frame = conf_val['target_frame']
+                self._conf_yaml[conf_key]['tf_frames'] = tf_frames_msg
 
         # Remove duplicate namespaces
         self._available_ns = list(dict.fromkeys(tmp_ns))
@@ -466,11 +470,12 @@ class HelpingHandGUI(Plugin):
         rospy.logdebug("Save button pressed !!")
 
         # Handle transform stamped
-        if data._type == 'geometry_msgs/TransformStamped':
-            trig_name = self._data_buffer[entry_identifier]['trig_name']
-            for keys, vals in self._data_buffer.items():
-                if (vals['trig_name'] == trig_name) and (vals['data']._type == 'sensor_msgs/JointState'):
-                    pass
+        if data._type == 'helping_hand_msgs/CaptureTF':
+            self._tf_capture_srv.call(data.from_frame, data.to_frame, save_name)
+            # trig_name = self._data_buffer[entry_identifier]['trig_name']
+            # for keys, vals in self._data_buffer.items():
+            #     if (vals['trig_name'] == trig_name) and (vals['data']._type == 'sensor_msgs/JointState'):
+            #         pass
 
         # Handle Joint space configuration
         elif data._type == 'sensor_msgs/JointState':
@@ -627,8 +632,6 @@ class HelpingHandGUI(Plugin):
             if self.grav_comp==True :
                 self.grav_comp=False
 
-
-                
                 self.srv_stiff.call()
                 print('turn off')
                 rospy.logdebug('grav_comp_off')
@@ -637,7 +640,10 @@ class HelpingHandGUI(Plugin):
                 print('turn on')
                 self.srv_soft.call()
                 rospy.logdebug('grav_comp_on')
-   
+
+        elif trig_type == "tf_save":
+            rospy.logdebug('tf_save')
+            save_data = [trigg_conf['tf_frames']]
 
         else:
             rospy.logerr("Unknown saving type !!")
