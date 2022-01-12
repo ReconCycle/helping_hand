@@ -108,7 +108,7 @@ class DatabasePusher(object):
             resulting_frame = self.tf2_buffer.lookup_transform(req.from_frame, req.to_frame, rospy.Time())
 
             # Set the tranformation's ID to the desired one
-            resulting_frame.child_frame_id = req.to_frame
+            resulting_frame.child_frame_id = req.new_frame_name
 
             # Display what you are doing
             rospy.loginfo("Storing transformation from <{0}> to <{1}> with the new name <{2}> into the database ...".format(

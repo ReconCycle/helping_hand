@@ -51,6 +51,6 @@ conf_6:
     trig_type: "rising_edge"
     trig_value: true
     trig_callback: "tf_save"
-    source_frame: "panda_link0"
-    target_frame: "panda_EE"
+    source_frame: "french_revolution_table"
+    target_frame: "panda_2_EE"
     last_frame_topic: "tool_name"
