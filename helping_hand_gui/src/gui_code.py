@@ -271,6 +271,10 @@ class HelpingHandGUI(Plugin):
         save_button = self._widget.findChild(QPushButton, 'save_button')
         save_button.clicked.connect(partial(self._save_button_pressed, save_button))
 
+        # Trigger button widget
+        trigger_button = self._widget.findChild(QPushButton, 'trigger_button')
+        trigger_button.clicked.connect(partial(self._trigger_button_pressed, trigger_button))
+
         # Create database proxy
         self._msg_store = MessageStoreProxy()
 
@@ -324,6 +328,8 @@ class HelpingHandGUI(Plugin):
                 conf_val['subscriber'] = rospy.Subscriber(conf_val['trig_topic'], Bool, callback=self._falling_edge_cb, callback_args=(conf_key))
             elif conf_val['trig_type'] == 'hold':
                 conf_val['subscriber'] = rospy.Subscriber(conf_val['trig_topic'], Bool, callback=self._hold_cb, callback_args=(conf_key))
+            elif conf_val['trig_type'] == 'trigger_button':
+                pass
             else:
                 self.status_report['status'] = "Error parsing trigger types."
 
@@ -471,7 +477,7 @@ class HelpingHandGUI(Plugin):
 
         # Handle transform stamped
         if data._type == 'helping_hand_msgs/CaptureTF':
-            self._tf_capture_srv.call(data.from_frame, data.to_frame, save_name)
+            self._tf_capture_srv.call(data.tf, data.from_frame, data.to_frame, save_name)
             # trig_name = self._data_buffer[entry_identifier]['trig_name']
             # for keys, vals in self._data_buffer.items():
             #     if (vals['trig_name'] == trig_name) and (vals['data']._type == 'sensor_msgs/JointState'):
@@ -569,6 +575,9 @@ class HelpingHandGUI(Plugin):
 
         self._conf_yaml[conf_name]['sig_val'] = new_val
 
+    def _trigger_button_pressed(self, trigger_button):
+        self._handle_trigger(self._conf_yaml["trigger_button"])
+
     def _hold_cb(self, data, conf_name):
         if not('sig_val' in self._conf_yaml[conf_name]):
             self._conf_yaml[conf_name]['sig_val'] = data.data
@@ -643,6 +652,9 @@ class HelpingHandGUI(Plugin):
 
         elif trig_type == "tf_save":
             rospy.logdebug('tf_save')
+            trigg_conf['tf_frames'].tf = self._tf2_buffer.lookup_transform(
+                trigg_conf['tf_frames'].from_frame, 
+                trigg_conf['tf_frames'].to_frame, rospy.Time())
             save_data = [trigg_conf['tf_frames']]
 
         else:

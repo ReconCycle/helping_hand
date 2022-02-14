@@ -119,9 +119,19 @@
        </rect>
       </property>
      </widget>
-     <zorder>save_button</zorder>
-     <zorder>save_name</zorder>
-     <zorder>listeningObj_2</zorder>
+     <widget class="QPushButton" name="trigger_button">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>130</y>
+        <width>141</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Trigger TF save</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QGroupBox" name="listeningObj_2">
      <property name="geometry">

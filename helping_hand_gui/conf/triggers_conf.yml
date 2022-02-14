@@ -51,6 +51,16 @@ conf_6:
     trig_type: "rising_edge"
     trig_value: true
     trig_callback: "tf_save"
-    source_frame: "french_revolution_table"
+    source_frame: "panda_2/panda_2_link0"
+    target_frame: "panda_2_EE"
+    last_frame_topic: "tool_name"
+trigger_button:
+    trig_name: "Trigger button pressed"
+    robot_ns: "/panda_2/"
+    trig_topic: ""
+    trig_type: "trigger_button"
+    trig_value: true
+    trig_callback: "tf_save"
+    source_frame: "panda_2/panda_2_link0"
     target_frame: "panda_2_EE"
     last_frame_topic: "tool_name"

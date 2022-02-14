@@ -105,10 +105,10 @@ class DatabasePusher(object):
     def _handle_tf_save(self, req):
         try:
             # Retrieve the transformation from the TF buffer
-            resulting_frame = self.tf2_buffer.lookup_transform(req.from_frame, req.to_frame, rospy.Time())
+            # resulting_frame = self.tf2_buffer.lookup_transform(req.from_frame, req.to_frame, rospy.Time())
 
             # Set the tranformation's ID to the desired one
-            resulting_frame.child_frame_id = req.new_frame_name
+            req.tf.child_frame_id = req.new_frame_name
 
             # Display what you are doing
             rospy.loginfo("Storing transformation from <{0}> to <{1}> with the new name <{2}> into the database ...".format(
@@ -116,7 +116,7 @@ class DatabasePusher(object):
             ))
 
             # Save to DB
-            self._save_to_db(resulting_frame, req.new_frame_name)
+            self._save_to_db(req.tf, req.new_frame_name)
 
             # Return the success
             return CaptureTFResponse(message='Frame saved', success=True)
