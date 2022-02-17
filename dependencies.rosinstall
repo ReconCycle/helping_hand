@@ -1,6 +1,6 @@
 - git:
     local-name: helping_hand_msgs 
-    uri: https://github.com/tgaspar/helping_hand_msgs.git
+    uri: https://github.com/ReconCycle/helping_hand_msgs.git
     version: main
 - git:
    local-name: dmp_record_tool
