@@ -271,9 +271,13 @@ class HelpingHandGUI(Plugin):
         save_button = self._widget.findChild(QPushButton, 'save_button')
         save_button.clicked.connect(partial(self._save_button_pressed, save_button))
 
-        # Trigger button widget
-        trigger_button = self._widget.findChild(QPushButton, 'trigger_button')
-        trigger_button.clicked.connect(partial(self._trigger_button_pressed, trigger_button))
+        # Capture TF save button widget
+        capture_button = self._widget.findChild(QPushButton, 'capture_tf_button')
+        capture_button.clicked.connect(partial(self._capture_tf_button_pressed, capture_button))
+        
+        # Capture joints save button widget
+        capture_button_joints = self._widget.findChild(QPushButton, 'capture_joints_button')
+        capture_button_joints.clicked.connect(partial(self._capture_joints_button_pressed, capture_button_joints))       
 
         # Create database proxy
         self._msg_store = MessageStoreProxy()
@@ -328,7 +332,7 @@ class HelpingHandGUI(Plugin):
                 conf_val['subscriber'] = rospy.Subscriber(conf_val['trig_topic'], Bool, callback=self._falling_edge_cb, callback_args=(conf_key))
             elif conf_val['trig_type'] == 'hold':
                 conf_val['subscriber'] = rospy.Subscriber(conf_val['trig_topic'], Bool, callback=self._hold_cb, callback_args=(conf_key))
-            elif conf_val['trig_type'] == 'trigger_button':
+            elif conf_val['trig_type'] == 'capture_button':
                 pass
             else:
                 self.status_report['status'] = "Error parsing trigger types."
@@ -575,8 +579,11 @@ class HelpingHandGUI(Plugin):
 
         self._conf_yaml[conf_name]['sig_val'] = new_val
 
-    def _trigger_button_pressed(self, trigger_button):
-        self._handle_trigger(self._conf_yaml["trigger_button"])
+    def _capture_tf_button_pressed(self, capture_button):
+        self._handle_trigger(self._conf_yaml["capture_tf_button"])
+
+    def _capture_joints_button_pressed(self, capture_button):
+        self._handle_trigger(self._conf_yaml["capture_joints_button"])
 
     def _hold_cb(self, data, conf_name):
         if not('sig_val' in self._conf_yaml[conf_name]):
@@ -652,10 +659,13 @@ class HelpingHandGUI(Plugin):
 
         elif trig_type == "tf_save":
             rospy.logdebug('tf_save')
-            trigg_conf['tf_frames'].tf = self._tf2_buffer.lookup_transform(
-                trigg_conf['tf_frames'].from_frame, 
-                trigg_conf['tf_frames'].to_frame, rospy.Time())
-            save_data = [trigg_conf['tf_frames']]
+            try:
+                trigg_conf['tf_frames'].tf = self._tf2_buffer.lookup_transform(
+                    trigg_conf['tf_frames'].from_frame, 
+                    trigg_conf['tf_frames'].to_frame, rospy.Time(), rospy.Duration(2))
+                save_data = [trigg_conf['tf_frames']]
+            except:
+                rospy.loginfo("Timeout when waiting for transform! Try again in a moment.")
 
         else:
             rospy.logerr("Unknown saving type !!")

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>906</width>
-    <height>490</height>
+    <height>494</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -36,7 +36,7 @@
      <property name="geometry">
       <rect>
        <x>600</x>
-       <y>230</y>
+       <y>250</y>
        <width>261</width>
        <height>191</height>
       </rect>
@@ -88,7 +88,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>230</y>
+       <y>270</y>
        <width>271</width>
        <height>171</height>
       </rect>
@@ -100,7 +100,7 @@
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>80</y>
+        <y>70</y>
         <width>141</width>
         <height>27</height>
        </rect>
@@ -117,19 +117,6 @@
         <width>251</width>
         <height>31</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="trigger_button">
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>130</y>
-        <width>141</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Trigger TF save</string>
       </property>
      </widget>
     </widget>
@@ -176,7 +163,7 @@
      <property name="geometry">
       <rect>
        <x>330</x>
-       <y>230</y>
+       <y>250</y>
        <width>261</width>
        <height>191</height>
       </rect>
@@ -197,6 +184,32 @@
        <bool>true</bool>
       </property>
      </widget>
+    </widget>
+    <widget class="QPushButton" name="capture_tf_button">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>230</y>
+       <width>131</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Capture Cartesian</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="capture_joints_button">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>230</y>
+       <width>131</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Capture joints</string>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="setttings">
