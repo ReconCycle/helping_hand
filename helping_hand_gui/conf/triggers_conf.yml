@@ -45,33 +45,31 @@ conf_5:
     joint_topic: "joint_states"
     last_frame_topic: "tool_name"
 conf_6:
-    trig_name: "Record TF for Panda 2"
-    robot_ns: "/panda_2/"
+    trig_name: "Record TF for Panda 1"
+    robot_ns: "/panda_1/"
     trig_topic: "/keypress/previous"
     trig_type: "rising_edge"
+    trig_value: true
+    trig_callback: "tf_save"
+    source_frame: "panda_1/panda_1_link0"
+    target_frame: "panda_1/panda_EE"
+    last_frame_topic: "tool_name"
+capture_tf_button:
+    trig_name: "Capture Cartesian pose button pressed"
+    robot_ns: "/panda_2/"
+    trig_topic: ""
+    trig_type: "capture_button"
     trig_value: true
     trig_callback: "tf_save"
     source_frame: "panda_2/panda_2_link0"
     target_frame: "panda_2_EE"
     last_frame_topic: "tool_name"
-capture_tf_button:
-    trig_name: "Capture Cartesian pose button pressed"
-    robot_ns: "/panda_1/"
-    trig_topic: ""
-    trig_type: "capture_button"
-    trig_value: true
-    trig_callback: "tf_save"
-    source_frame: "panda_1/panda_1_link0"
-    target_frame: "panda_1_EE"
-    last_frame_topic: "tool_name"
 capture_joints_button:
     trig_name: "Capture joints button pressed"
-    robot_ns: "/panda_1/"
+    robot_ns: "/panda_2/"
     trig_topic: ""
     trig_type: "capture_button"
     trig_value: true
     trig_callback: "joint_save"
-    source_frame: "panda_1/panda_1_link0"
-    target_frame: "panda_1_EE"
     joint_topic: "joint_states"
     last_frame_topic: "tool_name"

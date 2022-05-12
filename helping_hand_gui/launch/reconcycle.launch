@@ -6,8 +6,9 @@
   <node name="db_republisher" pkg="helping_hand_nodes" type="mongo_tf_republisher" required="true" output="screen"/>
   <node name="helping_hand_services" pkg="helping_hand_services" type="helping_hand_services" required="true" output="screen"/>
   
-  <node name="french_to_panda_1" pkg="tf" type="static_transform_publisher" args="0.2 0.2 0 0 0 0 1 french_revolution_table panda_1/panda_1_link0 200"/>
-  <node name="french_to_panda_2" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 1 french_revolution_table panda_2/panda_2_link0 200"/>
+  <!-- <node name="french_to_panda_1" pkg="tf" type="static_transform_publisher" args="0.2 0.2 0 0 0 0 1 french_revolution_table panda_1/panda_1_link0 200"/>
+  <node name="french_to_panda_2" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 1 french_revolution_table panda_2/panda_2_link0 200"/> -->
 
-  <node name="panda_2_link8_fix" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 1 panda_2/panda_2_link8 panda_2_link8 200"/>
+  <node name="panda_1_link8_fix" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 1 panda_1/panda_1_link8 panda_1_link8 30"/>
+  <node name="panda_2_link8_fix" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 1 panda_2/panda_2_link8 panda_2_link8 30"/>
 </launch>

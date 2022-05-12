@@ -88,9 +88,9 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>270</y>
+       <y>300</y>
        <width>271</width>
-       <height>171</height>
+       <height>141</height>
       </rect>
      </property>
      <property name="title">
@@ -163,9 +163,9 @@
      <property name="geometry">
       <rect>
        <x>330</x>
-       <y>250</y>
+       <y>270</y>
        <width>261</width>
-       <height>191</height>
+       <height>171</height>
       </rect>
      </property>
      <property name="title">
@@ -188,8 +188,8 @@
     <widget class="QPushButton" name="capture_tf_button">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>230</y>
+       <x>150</x>
+       <y>260</y>
        <width>131</width>
        <height>27</height>
       </rect>
@@ -201,7 +201,7 @@
     <widget class="QPushButton" name="capture_joints_button">
      <property name="geometry">
       <rect>
-       <x>160</x>
+       <x>400</x>
        <y>230</y>
        <width>131</width>
        <height>27</height>
@@ -209,6 +209,22 @@
      </property>
      <property name="text">
       <string>Capture joints</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="source_tf_frame">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>230</y>
+       <width>261</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>panda_2/panda_2_link0</string>
+     </property>
+     <property name="placeholderText">
+      <string>Source TF frame</string>
      </property>
     </widget>
    </widget>

@@ -347,8 +347,17 @@ class HelpingHandGUI(Plugin):
                 joint_topic_addr = conf_val['robot_ns'] + conf_val['joint_topic']
                 conf_val['subscriber'] = rospy.Subscriber(joint_topic_addr, JointState, callback=self._joint_state_cb, callback_args=(conf_key))
             if conf_val['trig_callback'] == 'tf_save':
+                source_frame_widget = self._widget.findChild(QLineEdit, 'source_tf_frame')
+                source_frame = source_frame_widget.text()
+
+                # Check if a source frame was entered
+                if not(len(source_frame)):
+                    self.status_report['status'] = 'No source frame provided!'
+                    return -1
+                
                 tf_frames_msg = CaptureTF()
-                tf_frames_msg.from_frame = conf_val['source_frame']
+                # tf_frames_msg.from_frame = conf_val['source_frame']
+                tf_frames_msg.from_frame = source_frame
                 tf_frames_msg.to_frame = conf_val['target_frame']
                 self._conf_yaml[conf_key]['tf_frames'] = tf_frames_msg
 
@@ -662,10 +671,11 @@ class HelpingHandGUI(Plugin):
             try:
                 trigg_conf['tf_frames'].tf = self._tf2_buffer.lookup_transform(
                     trigg_conf['tf_frames'].from_frame, 
-                    trigg_conf['tf_frames'].to_frame, rospy.Time(), rospy.Duration(2))
+                    trigg_conf['tf_frames'].to_frame, rospy.Time(), rospy.Duration(5))
                 save_data = [trigg_conf['tf_frames']]
-            except:
+            except Exception as e:
                 rospy.loginfo("Timeout when waiting for transform! Try again in a moment.")
+                rospy.loginfo("Error: {}".format(e))
 
         else:
             rospy.logerr("Unknown saving type !!")
